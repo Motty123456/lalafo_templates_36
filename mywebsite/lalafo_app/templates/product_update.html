@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменить товар</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f6fa;
+            --card: #ffffff;
+            --text: #1d1f2b;
+            --muted: #7b7f93;
+            --accent: #6c5ce7;
+            --accent-2: #a29bfe;
+            --red: #e17055;
+            --shadow: 0 4px 20px rgba(30, 30, 60, 0.07);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #fff;
+            padding: 64px 20px 110px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 46px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            margin-top: 12px;
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: -70px auto 60px;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: var(--card);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            padding: 38px;
+        }
+
+        .field { margin-bottom: 22px; }
+
+        .field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .field input[type="text"],
+        .field input[type="number"],
+        .field input[type="tel"],
+        .field input[type="email"],
+        .field select,
+        .field textarea {
+            width: 100%;
+            font-family: inherit;
+            font-size: 16px;
+            color: var(--text);
+            background: #f7f8fc;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color .25s, background .25s, box-shadow .25s;
+        }
+
+        .field textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            background: #fff;
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, .12);
+        }
+
+        .field input[type="file"] {
+            width: 100%;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--muted);
+            background: #f7f8fc;
+            border: 2px dashed var(--accent-2);
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+        }
+
+        .field input[type="file"]::file-selector-button {
+            font-family: inherit;
+            font-weight: 700;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 9px 16px;
+            margin-right: 14px;
+            cursor: pointer;
+        }
+
+        .field a { color: var(--accent); font-weight: 600; }
+
+        .field.check {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f7f8fc;
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+
+        .field.check label { margin: 0; order: 2; }
+
+        .field.check input {
+            order: 1;
+            width: 22px;
+            height: 22px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .help {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .errors {
+            list-style: none;
+            margin-top: 8px;
+            color: var(--red);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 16px;
+            border: none;
+            cursor: pointer;
+            transition: transform .3s, box-shadow .3s, background .3s;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #fff;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(108, 92, 231, .35);
+        }
+
+        .btn-cancel {
+            background: #efedff;
+            color: var(--accent);
+        }
+
+        .btn-cancel:hover {
+            background: #e3dffe;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 480px) {
+            .form-card { padding: 24px 20px; }
+            .actions { flex-direction: column-reverse; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>Изменить товар</h1>
+        <p>Обновите данные и сохраните изменения</p>
+    </header>
+
+    <main class="container">
+        <form method="post" enctype="multipart/form-data" class="form-card">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <ul class="errors">
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                </ul>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="field{% if field.field.widget.input_type == 'checkbox' %} check{% endif %}">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="help">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <ul class="errors">
+                            {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="actions">
+                <a href="{% url 'product_list' %}" class="btn btn-cancel">Отмена</a>
+                <button type="submit" class="btn btn-save">Сохранить</button>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>
